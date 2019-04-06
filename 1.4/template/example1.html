@@ -15,8 +15,10 @@
           result = previousNumber + nextNumber;
           previousNumber = nextNumber;
           nextNumber = result;
-          document.write(`${result}, `);
           times--;
+
+          // Diese Zeile schreibt das Resultat in das HTML-Dokument
+          document.write(`${result}, `);
         }
 
         return result;
