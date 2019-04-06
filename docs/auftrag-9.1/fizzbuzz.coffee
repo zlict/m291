@@ -14,4 +14,6 @@ buzzTheFizz = (length = 100) ->
     else
       result.push(i)
 
+  result
+
 console.log(buzzTheFizz(1000))
