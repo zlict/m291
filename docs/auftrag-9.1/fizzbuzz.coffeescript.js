@@ -11,25 +11,24 @@
   };
 
   buzzTheFizz = function(length = 100) {
-    var i, j, result, results;
+    var i, j, result;
     result = [];
-    results = [];
     for (i = j = 1; j <= 100; i = ++j) {
       if (isFizz(i) && isBuzz(i)) {
-        results.push(result.push("FizzBuzz"));
+        result.push("FizzBuzz");
       } else if (isFizz(i)) {
-        results.push(result.push("Fizz"));
+        result.push("Fizz");
       } else if (isBuzz(i)) {
-        results.push(result.push("Buzz"));
+        result.push("Buzz");
       } else {
-        results.push(result.push(i));
+        result.push(i);
       }
     }
-    return results;
+    return result;
   };
 
   console.log(buzzTheFizz(1000));
 
 }).call(this);
 
-//# sourceMappingURL=fizzbuzz.coffeescript.js.map
+//# sourceMappingURL=fizzbuzz.coffescript.js.map
