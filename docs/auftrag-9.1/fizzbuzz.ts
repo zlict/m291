@@ -1,7 +1,7 @@
-const isFizz = (x: number) => x % 3 === 0;
-const isBuzz = (x: number) => x % 5 === 0;
+isFizz = (x: number) => x % 3 === 0;
+isBuzz = (x: number) => x % 5 === 0;
 
-const buzzTheFizz = (length = 100) => {
+buzzTheFizz = (length = 100) => {
   let result = [];
   for (let index = 1; index <= length; index++) {
     result.push(

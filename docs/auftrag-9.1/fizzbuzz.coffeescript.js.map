@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "file": "fizzbuzz.coffeescript.js",
+  "sourceRoot": "",
+  "sources": [
+    "fizzbuzz.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,MAAA,WAAA,EAAA,MAAA,EAAA;;EAAA,MAAA,GAAS,QAAA,CAAC,CAAD,CAAA;WAAO,CAAA,GAAI,CAAJ,KAAS;EAAhB;;EACT,MAAA,GAAS,QAAA,CAAC,CAAD,CAAA;WAAO,CAAA,GAAI,CAAJ,KAAS;EAAhB;;EAET,WAAA,GAAc,QAAA,CAAC,SAAS,GAAV,CAAA;AACZ,QAAA,CAAA,EAAA,CAAA,EAAA,MAAA,EAAA;IAAA,MAAA,GAAS;AAET;IAAA,KAAS,4BAAT;MACE,IAAG,MAAA,CAAO,CAAP,CAAA,IAAa,MAAA,CAAO,CAAP,CAAhB;qBACE,MAAM,CAAC,IAAP,CAAY,UAAZ,GADF;OAAA,MAEK,IAAG,MAAA,CAAO,CAAP,CAAH;qBACH,MAAM,CAAC,IAAP,CAAY,MAAZ,GADG;OAAA,MAEA,IAAG,MAAA,CAAO,CAAP,CAAH;qBACH,MAAM,CAAC,IAAP,CAAY,MAAZ,GADG;OAAA,MAAA;qBAGH,MAAM,CAAC,IAAP,CAAY,CAAZ,GAHG;;IALP,CAAA;;EAHY;;EAad,OAAO,CAAC,GAAR,CAAY,WAAA,CAAY,IAAZ,CAAZ;AAhBA",
+  "sourcesContent": [
+    "isFizz = (x) -> x % 3 == 0\nisBuzz = (x) -> x % 5 == 0\n\nbuzzTheFizz = (length = 100) ->\n  result = []\n\n  for i in [1..100]\n    if isFizz(i) && isBuzz(i)\n      result.push(\"FizzBuzz\")\n    else if isFizz(i)\n      result.push(\"Fizz\")\n    else if isBuzz(i)\n      result.push(\"Buzz\")\n    else\n      result.push(i)\n\nconsole.log(buzzTheFizz(1000))"
+  ]
+}
