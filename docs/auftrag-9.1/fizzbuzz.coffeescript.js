@@ -31,4 +31,4 @@
 
 }).call(this);
 
-//# sourceMappingURL=fizzbuzz.coffescript.js.map
+//# sourceMappingURL=fizzbuzz.coffeescript.js.map
