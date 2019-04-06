@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="de">
+
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script>
+      function fibonacci(times) {
+
+        var previousNumber = 0;
+        var nextNumber = 1;
+        var result;
+
+        while (times >= 0) {
+          result = previousNumber + nextNumber;
+          previousNumber = nextNumber;
+          nextNumber = result;
+          document.write(`${result}, `);
+          times--;
+        }
+
+        return result;
+      }
+
+      fibonacci(100);
+    </script>
+  </head>
+
+  <body>
+  </body>
+
+</html>
