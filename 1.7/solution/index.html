@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="de">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Tageszeit</title>
+    <script type="text/javascript">
+
+      const name = prompt("Name?");
+      const hour = (new Date()).getHours();
+
+      if (hour < 5) {
+        alert(`Guten Nacht ${name}`);
+      } else if (hour < 12) {
+        alert(`Guten Morgen ${name}`);
+      } else if (hour < 18) {
+        alert(`Guten Tag ${name}`);
+      } else if (hour < 22) {
+        alert(`Guten Abend ${name}`);
+      } else {
+        alert(`Guten Nacht ${name}`);
+      }
+
+    </script>
+  </head>
+
+  <body>
+
+  </body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="de">
+
+  <head>
+    <meta charset="utf-8">
+    <title>Ratespiel</title>
+    <script type="text/javascript">
+      const secret = Math.floor(Math.random() * 100);
+      let guess = null;
+      let tries = 0;
+
+      while (true) {
+        guess = prompt("Nummer?");
+        tries++;
+
+        if (guess == secret) {
+          alert(`You win! It took you ${tries} tries`);
+          break;
+        } else if (guess > secret) {
+          alert("You're too high!");
+        } else if (guess < secret) {
+          alert("You're too low!");
+        }
+
+      }
+    </script>
+  </head>
+
+  <body>
+
+  </body>
+
+</html>
