@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de">
+
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      body {
+        font-size: 2rem;
+        background-color: #000000;
+        color: white;
+      }
+
+      #hamburgerNav {
+        box-sizing: border-box;
+        position: fixed;
+        width: 25vw;
+        top: 0;
+        left: -25vw;
+        height: 100vh;
+        background-color: red;
+        padding: 1rem;
+
+        transition-property: left;
+        transition-duration: 300ms;
+      }
+
+      #hamburgerNav>ul {
+        padding: 0;
+        padding-left: 2rem;
+        list-style: none;
+        margin: 0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      #hamburgerNav.active {
+        left: 0vw;
+        display: block;
+      }
+
+    </style>
+    <script>
+
+      function toggleNav() {
+        document.getElementById("hamburgerNav").classList.toggle("active");
+      }
+    </script>
+  </head>
+
+  <body>
+    <a href="javascript:toggleNav()">☰</a>
+    <nav id="hamburgerNav">
+      <a href="javascript:toggleNav()">×</a>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Products</a></li>
+        <li><a href="#">Team</a></li>
+        <li><a href="#">Legal</a></li>
+      </ul>
+    </nav>
+  </body>
+
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="de">
+
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      body {
+        padding: 0;
+      }
+
+      .slider {
+        box-sizing: border-box;
+        height: 100vh;
+      }
+
+      .slider>nav {
+        display: flex;
+      }
+
+      .slider>nav>button {
+        flex: 1 1;
+      }
+
+      .slides {
+        display: flex;
+        overflow-x: auto;
+        /* overflow-x: hidden; */
+      }
+
+      .slide {
+        box-sizing: border-box;
+        flex-shrink: 0;
+        width: 100%;
+        height: 100%;
+        padding: 3rem;
+      }
+
+      .slide img {
+        display: block;
+        margin: 0 auto;
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+    </style>
+    <script>
+      function currentSlide(slider) {
+        return slider.querySelector(".slide.active");
+      }
+
+      function nextSlide(slider) {
+        let current = currentSlide(slider);
+        let next = current.nextElementSibling || current.parentElement.firstElementChild;
+        current.classList.remove("active");
+        next.classList.add("active");
+        slider.querySelector(".slides").scrollLeft = next.scrollWidth;
+      }
+
+      function prevSlide(slider) {
+        let current = currentSlide(slider);
+        // let prev = current.prevElementSibling || current.parentElement.firstElementChild;
+        current.classList.remove("active");
+        next.classList.add("active");
+        slider.querySelector(".slides").scrollLeft = next.scrollWidth;
+      }
+
+      document.addEventListener('DOMContentLoaded', function () {
+        for (let slider of document.getElementsByClassName("slider")) {
+          slider.querySelector("button.next").addEventListener('click', function (e) {
+            nextSlide(e.target.closest(".slider"));
+          });
+          slider.querySelector("button.prev").addEventListener('click', function (e) {
+            nextSlide(e.target.closest(".slider"));
+          });
+        }
+      });
+
+    </script>
+  </head>
+
+  <body>
+    <div class="slider">
+      <main class="slides">
+        <div class="slide active" id="slide-1"><img src="http://placekitten.com/200/300"></div>
+        <div class="slide" id="slide-2"><img src="http://placekitten.com/200/300"></div>
+        <div class="slide" id="slide-3"><img src="http://placekitten.com/200/300"></div>
+        <div class="slide" id="slide-4"><img src="http://placekitten.com/200/300"></div>
+        <div class="slide" id="slide-5"><img src="http://placekitten.com/200/300"></div>
+      </main>
+      <nav>
+        <button class="prev">←</button>
+        <button class="next">→</button>
+      </nav>
+    </div>
+  </body>
+
+</html>
