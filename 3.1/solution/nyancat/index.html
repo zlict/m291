@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="de">
+
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      body {
+        background: url(bg.gif) repeat;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <img id="cat" src="nyan1.svg" style="position: absolute; height: 100px;">
+    <script>
+      let cat = document.getElementById('cat');
+      cat.style.left = - cat.offsetWidth
+
+      setInterval(function () {
+        let left = parseInt(cat.style.left);
+        if (left > document.body.clientWidth) {
+          left = - cat.offsetWidth
+        }
+
+        cat.style.left = `${left + 8}px`;
+        cat.style.top = `${Math.sin(left / 50) * 20 + 250}px`;
+      }, 10);
+
+    </script>
+  </body>
+
+</html>

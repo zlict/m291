@@ -7,7 +7,7 @@
     <script type="text/javascript">
 
       const name = prompt("Name?");
-      const hour = (new Date()).getHours();
+      const hour = new Date().getHours();
 
       if (hour < 5) {
         alert(`Guten Nacht ${name}`);

@@ -1,0 +1,24 @@
+#playground {
+  display: grid;
+  grid: repeat(4, 150px) / repeat(5, 150px);
+  grid-gap: 2rem;
+}
+
+.tile.revealed img, .tile.found img {
+  margin: 2rem auto;
+  display: block;
+}
+
+.tile img {
+  display: none;
+}
+
+.tile.revealed, .tile.found {
+  background-color: white;
+  background-image: none;
+}
+
+.tile {
+  background-color: #878c00;
+  background-image: url("https://www.transparenttextures.com/patterns/argyle.png");
+}
