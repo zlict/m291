@@ -5,34 +5,39 @@ const getFlagPath = function (canton) {
   return `../template/img/${canton}.png`;
 }
 
+const playerWon = function (playground) {
+  return playground.querySelectorAll(".tile").length == playground.querySelectorAll(".tile.found").length
+}
+
 const checkTurn = function (event) {
   let tile = event.currentTarget;
   let playground = tile.closest("#playground");
-  let revealedTiles = playground.querySelectorAll(".tile.revealed");
+  let revealedTiles = Array.from(playground.querySelectorAll(".tile.revealed"));
+
+  tile.classList.add("revealed");
 
   if (revealedTiles.length >= 2) {
-    for (let otherTile of revealedTiles) {
-      otherTile.classList.remove("revealed");
-    }
+    revealedTiles.forEach(otherTile => otherTile.classList.remove("revealed"));
   }
-  else if (revealedTiles.length >= 1) {
-    tile.classList.add("revealed");
-    for (let otherTile of revealedTiles) {
-      if (tile.children[0].src === otherTile.children[0].src) {
-        tries++;
+
+  if (revealedTiles.length == 1) {
+    tries++;
+    revealedTiles.forEach(otherTile => {
+      if (tile != otherTile && tile.children[0].src === otherTile.children[0].src) {
         tile.classList.add("found");
-        tile.classList.remove("revealed");
         otherTile.classList.add("found");
-        otherTile.classList.remove("revealed");
       }
+    });
+
+    if (playerWon(playground)) {
+      playground.classList.add("won");
     }
-  } else {
-    tile.classList.add("revealed");
   }
+
 }
 
 const createFlagElement = function (canton) {
-  const tile = document.createElement('div');
+  const tile = document.createElement('button');
   const tileImage = document.createElement('img');
   tileImage.setAttribute('src', getFlagPath(canton));
   tile.appendChild(tileImage);
