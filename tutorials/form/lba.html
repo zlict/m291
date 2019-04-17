@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="de">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Plus und Minus</title>
+  </head>
+
+  <body>
+    <span id="display">0</span> <button id="plus-eins">
+      +1
+    </button>
+    <button id="minus-eins">
+      -1 </button>
+    <script>
+      const display = document.getElementById('display');
+      const plusEinsButton = document.getElementById('plus-eins'); const minusEinsButton = document.getElementById('minus-eins');
+      plusEinsButton.addEventListener('click', function () {
+        display.innerHTML += 1;
+      });
+      minusEinsButton.addEventListener('click', function () {
+        display.innerHTML -= 1;
+      });
+    </script>
+  </body>
+
+</html>

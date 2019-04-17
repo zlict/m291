@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="de">
+
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      p.error {
+        color: red;
+        font-size: 0.75rem;
+        display: none;
+        margin: 0;
+      }
+
+      .validating :invalid+p.error {
+        display: inline;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <header>
+    </header>
+    <main>
+      <form id="form" novalidate>
+        <nav class="steps">
+          <a href="#step1">Schritt 1</a>
+          <a href="#step2">Schritt 2</a>
+          <a href="#step3">Schritt 3</a>
+        </nav>
+
+        <fieldset id="step1" class="step">
+          <h2>Personalien</h2>
+
+          <div class="form-field">
+            <label>Name</label>
+            <input type="text" name="name" class="validate" required>
+
+            <p class="error"></p>
+          </div>
+
+          <div class="form-field">
+            <label>Email</label>
+            <input type="email" class="validate" name="email" required>
+            <p class="error"></p>
+          </div>
+
+          <div class="form-field">
+            <label>Telefon</label>
+            <input type="text" class="validate" name="phone" pattern="^\+?[\s\./0-9]*$" required>
+            <p class="error"></p>
+          </div>
+
+          <nav>
+            <div></div>
+            <button class="nextStep">Nächster Schritt</button>
+          </nav>
+        </fieldset>
+
+        <fieldset id="step2" class="step">
+          <h2>Imbiss</h2>
+
+          <div class="form-field">
+            <label>Name</label>
+            <input class="validate" type="text" minlength="5" name="snackname">
+            <p class="error"></p>
+          </div>
+
+          <div class="form-field">
+            <label>Stadt</label>
+            <select class="validate" name="city" id="city" required>
+              <option></option>
+            </select>
+            <p class="error"></p>
+          </div>
+
+          <div class="form-field">
+            <label>Geolocation</label>
+            <input type="text" name="geolocation" class="validate" id="geolocateInput" required>
+            <button type="button" class="geolocate" id="geolocateButton">📌</button>
+            <p class="error"></p>
+          </div>
+
+          <nav>
+            <button class="prevStep">Vorheriger Schritt</button>
+            <button class="nextStep">Nächster Schritt</button>
+          </nav>
+        </fieldset>
+
+        <fieldset id="step3" class="step" data-prev-step="#step2">
+          <h2>Bewertung</h2>
+
+          <div class="form-field">
+            <label>Bewertung</label>
+            <input type="number" name="rating" class="validate" required>
+            <p class="error"></p>
+          </div>
+
+          <div class="form-field">
+            <label>Kommentar</label>
+            <textarea name="description" class="validate" maxlength="500" rows="6"></textarea>
+            <p class="error"></p>
+          </div>
+
+          <nav>
+            <button class="prevStep">Vorheriger Schritt</button>
+            <button class="nextStep" type="submit">Abschicken</button>
+          </nav>
+        </fieldset>
+      </form>
+    </main>
+    <script>
+      const cities = ["Zürich", "Bern", "St. Gallen", "Winterthur"];
+      const form = document.querySelector("form");
+      const cityElement = document.getElementById("city");
+
+      for (let city of cities) {
+        let optionElement = document.createElement("option");
+        optionElement.value = city;
+        optionElement.innerText = city;
+        cityElement.appendChild(optionElement);
+      }
+
+      const validateForm = function (e) {
+        e.preventDefault();
+        form.classList.add("validating");
+        form.querySelectorAll("[required]").forEach(function (formField) {
+          const wrapper = formField.closest(".form-field");
+          const error = wrapper.querySelector("p.error")
+          error.innerText = formField.validationMessage;
+        });
+      }
+
+      form.addEventListener("submit", validateForm);
+
+      document.getElementById("geolocateButton").addEventListener("click", function (e) {
+        const target = document.getElementById("geolocateInput");
+
+        navigator.geolocation.getCurrentPosition(function (result) {
+          target.value = `${result.coords.latitude}, ${result.coords.longitude}`;
+        }, function () {
+          target.setCustomValidity("Error");
+        })
+      });
+    </script>
+  </body>
+
+</html>

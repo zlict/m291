@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+  </head>
+
+  <body>
+    <form>
+      <input type="search" name="q" id="q">
+      <button type="submit">Search</button>
+    </form>
+
+    <div id="results" style="display:none;">
+      <h1>Results</h1>
+      <p>You searched for <span id="result-q"></span></p>
+    </div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const resultQElement = document.getElementById("result-q");
+        const resultsElement = document.getElementById("results");
+        const qElement = document.getElementById("q");
+        const formElement = document.querySelector("form");
+
+        // formElement.addEventListener("submit", function (e) {
+        //   e.preventDefault();
+        //   results.style.display = "block";
+        //   resultQElement.innerHTML = qElement.value;
+        // });
+        // <img%20src="https://i.kym-cdn.com/entries/icons/original/000/001/030/DButt.jpg">
+        const q = urlParams.get("q");
+        if (q.length > 0) {
+          results.style.display = "block";
+          resultQElement.innerHTML = q;
+        }
+      })
+    </script>
+  </body>
+
+</html>

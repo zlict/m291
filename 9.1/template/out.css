@@ -1,0 +1,25 @@
+#playground {
+  display: grid;
+  grid: repeat(5, 1fr)/repeat(4, 1fr);
+  grid-gap: 2rem;
+  width: 80vw;
+  height: 100vw;
+  margin: 0 auto; }
+
+.won {
+  opacity: 0.5;
+  background-color: red; }
+
+.tile {
+  background-color: #878c00;
+  background-image: url("https://www.transparenttextures.com/patterns/argyle.png"); }
+  .tile.revealed img, .tile.found img {
+    margin: 2rem auto;
+    display: block; }
+  .tile img {
+    display: none; }
+  .tile.revealed, .tile.found {
+    background-color: white;
+    background-image: none; }
+
+/*# sourceMappingURL=out.css.map */

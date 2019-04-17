@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="de">
+
+  <head>
+    <meta charset="utf-8">
+  </head>
+
+  <body>
+    <input type="range" min="100" max="5000" id="hertz">
+    <button id="start">Play</button>
+    <button id="stop">Stop</button>
+
+    <script type="text/javascript">
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioCtx.createOscillator();
+      oscillator.connect(audioCtx.destination);
+      const hertz = document.getElementById("hertz");
+
+      hertz.addEventListener("change", function () {
+        oscillator.type = 'square';
+        oscillator.frequency.setValueAtTime(hertz.value, audioCtx.currentTime);
+      });
+
+      document.querySelector("#start").addEventListener("click", () => oscillator.start());
+      document.querySelector("#stop").addEventListener("click", () => oscillator.stop());
+
+    </script>
+  </body>
+
+</html>

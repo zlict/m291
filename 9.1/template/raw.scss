@@ -12,21 +12,24 @@
   background-color: red;
 }
 
-.tile.revealed img, .tile.found img {
-  margin: 2rem auto;
-  display: block;
-}
-
-.tile img {
-  display: none;
-}
-
-.tile.revealed, .tile.found {
-  background-color: white;
-  background-image: none;
-}
-
 .tile {
   background-color: #878c00;
   background-image: url("https://www.transparenttextures.com/patterns/argyle.png");
+
+&.revealed, &.found {
+
+  img {
+  margin: 2rem auto;
+  display: block;
+}
+}
+
+ img {
+  display: none;
+}
+
+&.revealed, &.found {
+  background-color: white;
+  background-image: none;
+}
 }
