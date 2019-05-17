@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <style>
+      body {
+        background-color: rgb(0, 107, 0);
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      #ball {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 40px;
+        height: 40px;
+        transition: all 1s;
+      }
+
+    </style>
+  </head>
+
+  <body style="height:2000px">
+    <img src="https://en.js.cx/clipart/ball.svg" id="ball">
+    <script>
+      ball = document.getElementById("ball");
+      document.body.addEventListener('click', function (event) {
+        ball.style.left = event.clientX + 'px';
+        ball.style.top = event.clientY + 'px';
+      });
+    </script>
+  </body>

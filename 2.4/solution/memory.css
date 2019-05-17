@@ -1,19 +1,25 @@
 #playground {
   display: grid;
-  grid: repeat(5, 1fr) / repeat(4, 1fr);
-  grid-gap: 2rem;
+  grid: repeat(3, 1fr) / repeat(7, 1fr);
+  grid-gap: 1rem;
   width: 80vw;
-  height: 100vw;
+  /* miheight: 100vw; */
   margin: 0 auto;
 }
 
 .won {
   opacity: 0.5;
-  background-color: red;
+  position: relative;
+}
+
+.won .won-text {
+font-size: 4rem;
+font-weight: bold;
+text-align: center
 }
 
 .tile.revealed img, .tile.found img {
-  margin: 2rem auto;
+  margin: 1rem auto;
   display: block;
 }
 
@@ -27,6 +33,8 @@
 }
 
 .tile {
+  height: 8rem;
+  width: 8rem;
   background-color: #878c00;
   background-image: url("https://www.transparenttextures.com/patterns/argyle.png");
 }
