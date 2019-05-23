@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const input = document.getElementById("input");
+
+        input.addEventListener("focus", () => console.log("focus"));
+        input.addEventListener("change", function (event) {
+          console.log("change");
+          const value = event.currentTarget.value;
+          document.body.style.backgroundColor = value;
+        })
+
+        input.addEventListener("blur", function () {
+          console.log("blur");
+        })
+
+        input.addEventListener("keydown", function () {
+          console.log("keydown");
+        })
+      });
+
+    </script>
+  </head>
+
+  <body>
+    <h5>Text</h5>
+    <input type="text" id="input">
+
+    <h5>Color</h5>
+    <input type="color">
+  </body>
+
+</html>

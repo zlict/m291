@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <style>
+      label {
+        margin-top: 1rem;
+        display: block;
+      }
+
+      input:not(:placeholder-shown):invalid,
+      input:invalid,
+      select:invalid {
+
+        background-color: salmon;
+      }
+
+    </style>
+    <script src="../template/data_simple.js"></script>
+  </head>
+
+  <body>
+    <form>
+      <label>Vorname</label>
+      <input type="text" id="firstname">
+
+      <label>Nachname</label>
+      <input type="text" id="lastname">
+
+      <label>Adresse</label>
+      <input type="text" id="street"><br>
+      <input type="number" id="zip" placeholder=" " required minlength="4" maxlength="4">
+      <input type="text" id="place">
+
+      <label>Kanton</label>
+      <select id="canton">
+        <option value="BE">Bern</option>
+        <option value="ZH">Zürich</option>
+        <option value="LU">Luzern</option>
+        <option value="TG">Thurgau</option>
+        <option value="AG">Aargau</option>
+        <option value="SH">Schaffhausen</option>
+        <option value="Basel Land">BL</option>
+        <option value="Basel Stadt">BS</option>
+        <option value="AI">Appenzell Innerhoden</option>
+        <option value="AR">Appenzell Ausserhoden</option>
+        <option value="GR">Graubünden</option>
+        <option value="TI">Tessin</option>
+        <option value="VS">Wallis</option>
+        <option value="GE">Genf</option>
+        <option value="NE">Neuenburg</option>
+        <option value="JU">Jura</option>
+        <option value="UR">Uri</option>
+        <option value="OW">Obwalden</option>
+        <option value="NW">Nidwalden</option>
+        <option value="SZ">Schwyz</option>
+        <option value="GL">Glarus</option>
+        <option value="VD">Waadt</option>
+      </select>
+      <button>Anmelden</button>
+    </form>
+    <script>
+      const zipElement = document.getElementById("zip");
+      const cantonElement = document.getElementById("canton");
+      const placeElement = document.getElementById("place");
+
+      const getDataFromZip = function () {
+        return zipData[zipElement.value];
+      }
+
+      const zipChangeHandler = function () {
+        const municipality = getDataFromZip();
+        if (municipality != null) {
+          cantonElement.value = municipality.state_code;
+          placeElement.value = municipality.place;
+          zipElement.setCustomValidity("");
+        } else {
+          cantonElement.value = "";
+          placeElement.value = "";
+          zipElement.setCustomValidity("PLZ nicht gefunden");
+        }
+      }
+
+      const cantonChangeHandler = function () {
+        const municipality = getDataFromZip();
+
+        if (municipality != null && cantonElement.value != municipality.state_code) {
+          cantonElement.setCustomValidity("Kanton ist falsch!");
+        } else {
+          cantonElement.setCustomValidity("");
+        }
+      }
+
+      zipElement.addEventListener("change", zipChangeHandler);
+      cantonElement.addEventListener("change", cantonChangeHandler);
+
+    </script>
+  </body>
+
+</html>

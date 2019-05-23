@@ -1,5 +1,17 @@
 <!DOCTYPE html>
 <html>
+  <style>
+    input:invalid {
+      border: 2px solid red;
+      outline: none;
+    }
+
+    input:valid {
+      border: 2px solid green;
+      outline: none;
+    }
+
+  </style>
 
   <head>
     <meta charset="utf-8">
@@ -9,6 +21,7 @@
     <form id="myForm">
       <label>Email</label>
       <input type="email">
+      <input type="text" pattern=".*@.*\..{2,20}">
 
       <button type="submit">Senden</button>
 
