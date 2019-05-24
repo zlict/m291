@@ -163,7 +163,7 @@
         let isValid = true;
         currentStep.classList.add("validating");
         currentStep.querySelectorAll("[required]").forEach(function (formField) {
-          if (!formField.validity.valid) {
+          if (!formField.checkValidity()) {
             isValid = false;
             const wrapper = formField.closest(".form-field");
             const error = wrapper.querySelector("p.error")
