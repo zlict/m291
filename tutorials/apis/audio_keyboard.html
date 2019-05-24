@@ -6,7 +6,6 @@
   </head>
 
   <body>
-    <input type="range" min="100" max="5000" id="hertz" style="-webkit-appearance: slider-vertical; height: 100px;">
     <button id="start">Play</button>
     <button id="stop">Stop</button>
 
@@ -14,15 +13,12 @@
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       const oscillator = audioCtx.createOscillator();
       oscillator.connect(audioCtx.destination);
-      const hertz = document.getElementById("hertz");
-
-      hertz.addEventListener("input", function () {
-        oscillator.type = 'square';
-        oscillator.frequency.setValueAtTime(hertz.value, audioCtx.currentTime);
-      });
+      oscillator.type = 'sine';
 
       document.querySelector("#start").addEventListener("click", () => oscillator.start());
       document.querySelector("#stop").addEventListener("click", () => oscillator.stop());
+      document.addEventListener("keydown", (evt) => oscillator.frequency.setValueAtTime(evt.keyCode * 10, audioCtx.currentTime));
+      document.addEventListener("keydown", (evt) => oscillator.frequency.setValueAtTime(1, audioCtx.currentTime + 1000));
 
     </script>
   </body>
