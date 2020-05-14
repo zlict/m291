@@ -6,10 +6,9 @@
     <title></title>
     <script>
       function fibonacci(times) {
-
-        var previousNumber = 0;
-        var nextNumber = 1;
-        var result;
+        let previousNumber = 0;
+        let nextNumber = 1;
+        let result;
 
         while (times >= 0) {
           result = previousNumber + nextNumber;
@@ -20,8 +19,6 @@
           // Diese Zeile schreibt das Resultat in das HTML-Dokument
           document.write(`${result}, `);
         }
-
-        return result;
       }
 
       fibonacci(100);
