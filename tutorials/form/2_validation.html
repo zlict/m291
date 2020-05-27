@@ -6,26 +6,35 @@
       outline: none;
     }
 
+    input:invalid + .error {
+      display: block;
+    }
+
+    .error {
+      display: none;
+      color: red;
+    }
+
     input:valid {
       border: 2px solid green;
       outline: none;
     }
-
   </style>
 
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
   </head>
 
   <body>
     <form id="myForm">
-      <label>Email</label>
-      <input type="email">
-      <input type="text" pattern=".*@.*\..{2,20}">
+      <div>
+        <label>Email</label>
+        <input type="text" minlength="10" maxlength="100" required />
+        <div class="error">Das Feld muss richtig ausgefüllt werden</div>
+      </div>
 
       <button type="submit">Senden</button>
-
     </form>
+    <script></script>
   </body>
-
 </html>

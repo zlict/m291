@@ -1,4 +1,4 @@
-#board {
+#playground {
   display: grid;
   grid: repeat(3, 1fr) / repeat(7, 1fr);
   grid-gap: 1rem;
@@ -19,7 +19,7 @@ text-align: center
 }
 
 .tile.revealed img, .tile.found img {
-  margin: auto;
+  margin: 1rem auto;
   display: block;
 }
 

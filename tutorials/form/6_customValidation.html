@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Validation</title>
+    <style>
+      form label {
+        display: block;
+      }
+      
+      /* all form elements that are to be validated have the "validate" class. */
+      /* if either the form or the field have the "validated" class and the field is :valid */
+      form .validate.validated:valid,
+      form.validated .validate:valid {
+        border: 2px solid rgb(14, 192, 14);
+        background-color: #b2ff9a;
+      }
+
+      /* if either the form or the field have the "validated" class and the field is :invalid */
+      form .validate.validated:invalid,
+      form.validated .validate:invalid {
+        border: 2px solid red;
+        background-color: #ff9a9a;
+      }
+
+      /* hide elements with the error-class when they are next to a form field, only show them when the field is invalid */
+      form .validate + .error {
+        display: none;
+        color: red;
+        font-size: 0.6rem;
+      }
+      form .validate.validated:invalid + .error,
+      form.validated .validate:invalid + .error {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <form novalidate>
+      <div>
+        <label>Name</label>
+        <input class="validate" type="text" name="name" required />
+        <div class="error">Muss ausgefüllt werden</div>
+      </div>
+      <div>
+        <label>Alter</label>
+        <input class="validate" type="number" name="age" min="18" required />
+        <div class="error">Sie müssen mindestens 18 Jahre alt sein</div>
+      </div>
+      <div>
+        <label>Email </label>
+        <input  class="validate" type="email" name="email" required />
+        <div class="error">Die Email-Adresset ist nicht korrekt</div>
+      </div>
+      <div>
+        <label>Code </label>
+        <input class="validate" type="text" name="code" />
+        <div class="error">Der Code ist nicht korrekt</div>
+      </div>
+      <div>
+        <button type="submit">Los</button>
+      </div>
+    </form>
+    <script>
+      const form = document.forms[0]
+
+      // custom validation for "code"
+      const validateCode = () => {
+        let validity 
+
+        if(form.elements.code.value == "S3CR3T") {
+          validity = "" // it's valid
+        } else {
+          validity = "Code stimmt nicht" // it's not valid
+        }
+
+        // sets validation state
+        form.elements.code.setCustomValidity(validity)
+      }
+
+      // listens for changes on form, but sets the "validated" class on the element that changed
+      form.addEventListener('change', event => {
+
+        // the class "validated" is used to mark a field as validated, which then is either :valid or :invalid
+        event.target.classList.add("validated")
+      })
+
+      // add a special handler for custom validation
+      form.elements.code.addEventListener('change', validateCode)
+
+      form.onsubmit = event => {
+        // mark the whole form as "validated", so everything is either :valid or :invalid
+        form.classList.add('validated')
+
+        // run the special validation
+        validateCode()
+
+        // check if all the element are valid, if not, don't submit the form
+        if(!form.checkValidity()) {
+          event.preventDefault();
+          return false;
+        }
+        alert("Formular abgeschickt")
+      }
+    </script>
+  </body>
+</html>

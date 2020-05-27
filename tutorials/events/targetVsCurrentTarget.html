@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Target</title>
+  <style>
+    body{
+      box-sizing: border-box;
+      height: 100vh;
+      padding: 100px;
+    }
+
+    main {
+      height: 100%;
+      background-color: chocolate;
+      padding: 10px;
+    }
+
+    button {
+      display: block;
+
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <button type="button" id="btn">Clicky click</button>
+  </main>
+  <script>
+    const handleMainClick = (event) => {
+      console.log("event.target = ")
+      console.log(event.target)
+      console.log("event.currentTarget = ")
+      console.log(event.currentTarget)
+    }
+
+    const element = document.body
+    element.onclick = handleMainClick
+
+    document.querySelector("#btn").onclick = (event) => {
+      event.stopPropagation()
+      console.log("Button gedrückt")
+    }
+
+  </script>
+</body>
+</html>

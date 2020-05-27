@@ -13,12 +13,12 @@
   </head>
 
   <body>
-    <img id="cat" src="https://i.gifer.com/17xo.gif" style="position: absolute; height: 100px;">
+    <img id="cat" src="https://i.gifer.com/17xo.gif" style="position: absolute; height: 150px;">
     <script>
       let cat = document.getElementById('cat');
       cat.style.left = - cat.offsetWidth
 
-      setInterval(function () {
+      setInterval(() => {
         let left = parseInt(cat.style.left);
         if (left > document.body.clientWidth) {
           left = - cat.offsetWidth
