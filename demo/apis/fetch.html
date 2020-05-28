@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fetch API</title>
+</head>
+<body>
+  <button onClick="handleClick()">Fetch</button>
+  <button onClick="handleClickAsync()">Fetch</button>
+  <p id="joke"></p>
+  <script>
+    const jokeAPI = "https://sv443.net/jokeapi/v2/joke/Programming?type=single"
+    const jokeElement = document.getElementById("joke")
+
+    function handleClick(event) {
+      fetch(jokeAPI, {})
+        .then(response => response.json())
+        .then(json => jokeElement.innerText = json.joke)
+    }
+
+    async function handleClickAsync(event) {
+      const response = await fetch(jokeAPI, {} )
+      const json = await response.json()
+      jokeElement.innerText = json.joke 
+    }
+  </script>
+</body>
+</html>

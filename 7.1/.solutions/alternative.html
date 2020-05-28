@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Imbiss</title>
+  <style>
+    form .error {
+      display: none;
+      color: red;
+      font-size: .7em;
+      margin-top: 4px;
+    }
+
+    form .validated .validate:invalid + .error {
+      display: block;
+    }
+
+    form .validated .validate:invalid {
+      outline: solid rgb(255, 68, 0);
+    }
+
+    form .validated .validate:valid {
+      outline: solid #3ed452;
+    }
+
+    form label {
+      display: block;
+    }
+
+    .field {
+      margin-bottom: 1rem;
+    }
+
+    fieldset {
+      display: none;
+    }
+
+    fieldset.currentStep {
+      display: block;
+    }
+
+    /* Additional styles are just for good looks */
+    html * {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      box-sizing: border-box;
+      min-height: 100vh;
+      width: 100vw;
+    }
+
+    fieldset {
+      max-width: 400px;
+      margin: auto;
+      border: none;
+      background-color: gainsboro;
+      border-radius: 2px;
+      padding: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <form>
+    <fieldset class="currentStep">
+      <div class="field">
+        <label>Name</label>
+        <input type="text" name="reporter_name" class="validate" required>
+        <div class="error"></div>
+      </div>
+      <div class="field">
+        <label>E-Mail</label>
+        <input type="email" name="reporter_email" class="validate" required>
+        <div class="error"></div>
+      </div>
+      <div class="field">
+        <label>Telefon</label>
+        <input type="phone" class="validate" name="reporter_phone" required pattern="^\+?[\s\./0-9]*$">
+        <div class="error"></div>
+      </div>
+      <button type="button" onClick="handleNext(event)">Weiter</button>
+    </fieldset>
+
+    <fieldset>
+      <div class="field">
+        <label>Imbiss Name</label>
+        <input type="text" name="imbiss_name" class="validate" required>
+        <div class="error"></div>
+      </div>
+      <div class="field">
+        <label>Stadt</label>
+        <select class="validate" name="imbiss_city" required>
+          <option selected="selected" disabled="disabled" value>Bitte auswählen</option>
+        </select>
+        <div class="error"></div>
+      </div>
+      <div class="field">
+        <label>Standort</label>
+        <button onclick="handleGeolocate(event)" type="button">◎</button>
+        <input type="text" name="imbiss_coords" class="validate">
+        <div class="error"></div>
+      </div>
+      <button type="button" onClick="handlePrev(event)">Zurück</button>
+      <button type="button" onClick="handleNext(event)">Weiter</button>
+    </fieldset>
+
+    <fieldset>
+      <div class="field">
+        <label>Bewertung</label>
+        <input type="number" name="rating" class="validate" min="0" max="5" required>
+        <div class="error"></div>
+      </div>
+      <div class="field">
+        <label>Bemerkungen</label>
+        <textarea class="validate" name="remarks"></textarea>
+        <div class="error"></div>
+      </div>
+      <button type="button" onClick="handlePrev(event)">Zurück</button>
+      <button type="submit" onClick="handleSubmit(event)">Fertig</button>
+    </fieldset>
+  </form>
+  <script>
+    // check a single form field
+    function checkField(field) {
+      // if it doesn't have the "validate" class, it doesn't need to be validated, so return true
+      if(!field.classList.contains("validate")) return true;
+
+      // add the "validated" class, so css can show it either :valid or :invalid
+      field.closest(".field").classList.add("validated")
+
+      // if it's valid return true
+      if(field.checkValidity()) return true;
+
+      // if it's not valid, put the error message into the error div
+      if(field.nextElementSibling && field.nextElementSibling.classList.contains("error")) {
+        field.nextElementSibling.innerText = field.validationMessage;
+      } 
+
+      return false
+    }
+
+    // check a single fieldset
+    function checkStep(fieldset) {
+      let isValid = true
+
+      // check all fields if they are valid
+      for(let formElement of fieldset.elements) {
+        isValid = checkField(formElement) && isValid
+      }
+      return isValid
+    }
+
+    // handle submit button
+    function handleSubmit(event) {
+      const fieldset = event.target.closest("fieldset")
+
+      // if step is not valid don't submit the form
+      if(!checkStep(fieldset)) {
+        event.preventDefault()
+        return false
+      }
+    }
+
+    // handle next buttons
+    function handleNext(event) {
+      const fieldset = event.target.closest("fieldset")
+
+      // if step is valid display the next step and hide the current one
+      if(checkStep(fieldset)) {
+        const nextFieldset = fieldset.nextElementSibling
+        fieldset.classList.remove("currentStep")
+        nextFieldset.classList.add("currentStep")
+      }
+    }
+
+    // handle prev buttons
+    function handlePrev(event) {
+      const fieldset = event.target.closest("fieldset")
+      const prevFieldset = fieldset.previousElementSibling
+  
+      // display the prev step and hide the current one
+      fieldset.classList.remove("currentStep")
+      prevFieldset.classList.add("currentStep")
+    }
+
+    // handle geolocate button
+    function handleGeolocate(event) {
+      targetElement = event.target.nextElementSibling
+      targetElement.setCustomValidity("")
+
+      // ask browser for position and provide callbacks
+      navigator.geolocation.getCurrentPosition(
+        result => { 
+          targetElement.value = `${result.coords.latitude}, ${result.coords.longitude}`
+          checkField(targetElement) 
+        }, 
+        error => { 
+          targetElement.setCustomValidity(error.message)
+          checkField(targetElement) 
+        }
+      )
+    }
+
+    // install change event handlers
+    for(let formElement of document.forms[0].elements) {
+      formElement.onchange = event => checkField(event.target)
+    }
+
+    // install options in select element
+    (() => {
+      const selectElement = document.forms[0].elements.imbiss_city
+      const cities = ["Bern", "Basel", "Zürich", "Genf", "Chur"]
+
+      for(let city of cities) {
+        const optionElement = document.createElement("option")
+        optionElement.value = city
+        optionElement.innerText = city
+        selectElement.append(optionElement)
+      }
+    })()
+  </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>T-Rex</title>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+
+    #canvas {
+      width: 100vw;
+    }
+
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="300" height="300"></canvas> 
+  <script>
+    const canvas = document.getElementById('canvas')
+    const ctx = canvas.getContext('2d')
+    const rex = new Image()
+
+    let t = 0
+    canvas.height = window.innerHeight
+    canvas.width = window.innerWidth
+    rex.src = './rex-frame-0.png'
+
+    function draw() {
+      ctx.drawImage(rex, 0, canvas.height - 32)
+
+      t++
+      window.requestAnimationFrame(draw);
+    }
+    
+     window.requestAnimationFrame(draw);
+  </script>
+</body>
+</html>
